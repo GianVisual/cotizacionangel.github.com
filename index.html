@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cotización | Gian Visuals</title>
+    <meta name="description" content="Propuesta audiovisual premium — Gian Visuals. Producción de video vertical y ecosistemas audiovisuales para marcas y líderes de industria.">
+    <meta name="robots" content="noindex">
+
+    <meta property="og:title" content="Propuesta Audiovisual | Gian Visuals">
+    <meta property="og:description" content="Producción audiovisual premium diseñada para proyectar autoridad.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+    <style>
+        /* ============================================================
+           SISTEMA DE DISEÑO — heredado de gianvisuals.com
+           ============================================================ */
+        :root {
+            --bg-body: #050507;
+            --bg-surface: #0E1016;
+            --bg-card: rgba(20, 22, 30, 0.6);
+            --primary-gradient: linear-gradient(90deg, #6366F1 0%, #A855F7 50%, #EC4899 100%);
+            --primary-glow: rgba(168, 85, 247, 0.4);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .ambient-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: -1;
+            background: radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+        }
+
+        .parallax-bg {
+            position: absolute; width: 400px; height: 400px; background: var(--primary-glow);
+            filter: blur(120px); border-radius: 50%; z-index: -1; opacity: 0.3; pointer-events: none;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .text-gradient { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .badge { display: inline-block; padding: 4px 14px; background: rgba(168, 85, 247, 0.15); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+
+        .reveal { opacity: 0; filter: blur(10px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform, opacity; }
+        .reveal-up { transform: translateY(60px); }
+        .reveal-left { transform: translateX(-80px); }
+        .reveal-right { transform: translateX(80px); }
+        .reveal-scale { transform: scale(0.8); }
+        .reveal.active { opacity: 1; filter: blur(0); transform: translate(0,0) scale(1); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; transition: var(--transition); cursor: pointer; border: 1px solid transparent; text-align: center; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: var(--primary-gradient); color: #fff; box-shadow: 0 4px 20px var(--primary-glow); position: relative; z-index: 1; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--primary-glow); filter: brightness(1.1); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border-light); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+        .section-padding { padding: 100px 0; }
+        .eyebrow { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #d8b4fe; margin-bottom: 14px; }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+            z-index: 1000; border-bottom: none; padding: 24px 0;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+        }
+        nav.scrolled {
+            background: rgba(5, 5, 7, 0.85);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            padding: 16px 0; border-bottom: 1px solid var(--border-light);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; z-index: 1001; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; transition: 0.2s; }
+        .nav-links a:hover { color: #fff; }
+        .nav-links .btn { padding: 11px 24px; }
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; z-index: 1001; }
+
+        /* ===== HERO (heredado del index) ===== */
+        .hero {
+            position: relative; min-height: 100vh;
+            padding: 130px 0 70px; display: flex; align-items: stretch; overflow: hidden;
+        }
+        .hero-content {
+            position: relative; z-index: 5; max-width: 1400px; margin: 0 auto;
+            padding: 0 80px; width: 100%;
+            display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; gap: 40px 80px;
+        }
+        .hero-left { grid-column: 1; grid-row: 1; text-align: left; align-self: center; }
+        .hero-left .badge { margin-bottom: 20px; }
+        .hero-left h1 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: clamp(2rem, 3.4vw, 3rem);
+            line-height: 1.05; font-weight: 700; letter-spacing: -2.5px; margin: 0;
+            color: #FFFFFF; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+        }
+        .hero-left h1 .muted { color: rgba(255, 255, 255, 0.3); font-weight: 600; letter-spacing: -2px; }
+        .hero-right { grid-column: 2; grid-row: 1; text-align: right; align-self: center; }
+        .hero-desc {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: 0.95rem; color: rgba(255, 255, 255, 0.7);
+            margin: 0 0 0 auto; line-height: 1.65; max-width: 320px; font-weight: 400;
+            text-shadow: 0 1px 20px rgba(0, 0, 0, 0.6);
+        }
+        .hero-meta { margin-top: 22px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+        .hero-meta span { font-size: 0.78rem; color: rgba(255,255,255,0.55); letter-spacing: 0.02em; }
+        .hero-meta strong { color: #fff; font-weight: 600; }
+        .hero-cta-row {
+            grid-column: 1 / -1; grid-row: 2;
+            display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 30px;
+        }
+        .hero-cta-row .btn { padding: 14px 28px; font-size: 0.95rem; }
+
+        /* Float sutil */
+        @keyframes floatA { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+        @keyframes floatB { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+        @keyframes floatC { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+        .hero-left .badge { animation: floatA 5.5s ease-in-out infinite; animation-delay: 0.4s; }
+        .hero-left h1 { animation: floatB 7s ease-in-out infinite; }
+        .hero-right { animation: floatC 6s ease-in-out infinite; animation-delay: 1s; }
+        .hero-cta-row { animation: floatA 6.5s ease-in-out infinite; animation-delay: 0.8s; }
+        .reveal:not(.active) { animation: none !important; }
+
+        /* Morph tipográfico */
+        .morph-wrap { display: inline-block; position: relative; vertical-align: baseline; }
+        .morph-text {
+            display: inline-block; animation: morphCycle 12s infinite; transform-origin: left center;
+            will-change: font-family, transform, opacity, filter;
+            background: var(--primary-gradient); -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+        }
+        @keyframes morphCycle {
+            0%, 18% { font-family: 'Plus Jakarta Sans', sans-serif; font-style: normal; font-weight: 700; letter-spacing: -2px; opacity: 1; filter: blur(0); transform: translateY(0); }
+            22% { opacity: 0.25; filter: blur(5px); transform: translateY(-3px); }
+            25% { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -1px; opacity: 0.25; filter: blur(5px); transform: translateY(3px); }
+            28%, 43% { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -1px; opacity: 1; filter: blur(0); transform: translateY(0); }
+            47% { opacity: 0.25; filter: blur(5px); transform: translateY(-3px); }
+            50% { font-family: 'Caveat', cursive; font-style: normal; font-weight: 700; letter-spacing: 0; opacity: 0.25; filter: blur(5px); transform: translateY(3px); }
+            53%, 68% { font-family: 'Caveat', cursive; font-style: normal; font-weight: 700; letter-spacing: 0; opacity: 1; filter: blur(0); transform: translateY(0); }
+            72% { opacity: 0.25; filter: blur(5px); transform: translateY(-3px); }
+            75% { font-family: 'JetBrains Mono', monospace; font-style: normal; font-weight: 700; letter-spacing: -2px; opacity: 0.25; filter: blur(5px); transform: translateY(3px); }
+            78%, 93% { font-family: 'JetBrains Mono', monospace; font-style: normal; font-weight: 700; letter-spacing: -2px; opacity: 1; filter: blur(0); transform: translateY(0); }
+            97% { opacity: 0.25; filter: blur(5px); transform: translateY(-3px); }
+            100% { font-family: 'Plus Jakarta Sans', sans-serif; font-style: normal; font-weight: 700; letter-spacing: -2px; opacity: 0.25; filter: blur(5px); transform: translateY(3px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-left .badge, .hero-left h1, .hero-right, .hero-cta-row, .morph-text { animation: none !important; }
+        }
+
+        /* Hero — capa de fondo */
+        .hero-bg { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+        .hero-bg-image {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center 12%;
+            filter: brightness(0.88) contrast(1.2) saturate(1.05);
+        }
+        .hero-bg-halo {
+            position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%);
+            width: clamp(500px, 55vw, 800px); aspect-ratio: 1 / 1; border-radius: 50%;
+            background: radial-gradient(circle at center,
+                rgba(168, 85, 247, 0.35) 0%, rgba(139, 92, 246, 0.18) 30%,
+                rgba(124, 58, 237, 0.08) 50%, transparent 70%);
+            filter: blur(50px); mix-blend-mode: screen; pointer-events: none;
+            animation: haloPulse 6s ease-in-out infinite; z-index: 2;
+        }
+        @keyframes haloPulse {
+            0%, 100% { opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        .hero-bg-grain {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+            opacity: 0.06; mix-blend-mode: overlay; pointer-events: none; z-index: 3;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0; z-index: 4; pointer-events: none;
+            background:
+                linear-gradient(to right,
+                    rgba(5, 5, 7, 0.97) 0%, rgba(5, 5, 7, 0.85) 10%, rgba(5, 5, 7, 0.45) 22%,
+                    rgba(5, 5, 7, 0.1) 35%, transparent 45%, transparent 55%,
+                    rgba(5, 5, 7, 0.1) 65%, rgba(5, 5, 7, 0.45) 78%, rgba(5, 5, 7, 0.85) 90%, rgba(5, 5, 7, 0.97) 100%),
+                linear-gradient(to bottom,
+                    rgba(5, 5, 7, 0.7) 0%, rgba(5, 5, 7, 0.2) 12%, transparent 25%,
+                    transparent 70%, rgba(5, 5, 7, 0.85) 100%);
+        }
+
+        /* ===== TARJETA GENÉRICA (glass) ===== */
+        .panel {
+            background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15) 0%, rgba(5, 5, 7, 0) 70%), var(--bg-surface);
+            border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 30px;
+            padding: 60px; position: relative; overflow: hidden;
+            box-shadow: 0 0 80px -20px rgba(124, 58, 237, 0.2);
+        }
+
+        /* ===== INFORMACIÓN DEL CLIENTE ===== */
+        .client-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+        .client-data { display: flex; flex-direction: column; gap: 0; }
+        .client-data .row {
+            display: flex; justify-content: space-between; gap: 24px;
+            padding: 18px 0; border-bottom: 1px solid var(--border-light);
+        }
+        .client-data .row:last-child { border-bottom: none; }
+        .client-data .row .label { color: var(--text-muted); font-size: 0.95rem; }
+        .client-data .row .value { color: #fff; font-weight: 600; text-align: right; }
+
+        .id-card-wrapper { perspective: 1000px; display: flex; justify-content: center; }
+        .id-card {
+            width: 280px; background: linear-gradient(145deg, #1a1c29, #0f1016);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 22px;
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: floatCard 6s ease-in-out infinite; transform-style: preserve-3d;
+        }
+        .id-photo {
+            width: 100%; aspect-ratio: 4/5; border-radius: 14px; margin: 0 auto 18px;
+            border: 1px solid rgba(255,255,255,0.12); object-fit: cover; object-position: top center;
+            box-shadow: 0 20px 50px rgba(99,102,241,0.35);
+        }
+        @keyframes floatCard { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-15px) rotate(2deg);} }
+        .id-name { display: block; font-size: 1.05rem; font-weight: 800; letter-spacing: 0.12em; }
+        .id-role { display: block; margin-top: 6px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--text-muted); }
+
+        /* ===== SOLUCIONES ===== */
+        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; }
+        .solution-card {
+            background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg); padding: 40px; transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .solution-card:hover { transform: translateY(-6px); border-color: rgba(168, 85, 247, 0.45); }
+        .solution-icon {
+            width: 60px; height: 60px; margin-bottom: 22px; border-radius: 50%;
+            background: var(--primary-gradient); display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; box-shadow: 0 10px 30px var(--primary-glow);
+        }
+        .solution-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
+        .solution-card p { color: var(--text-muted); font-size: 0.96rem; }
+        .solution-num {
+            position: absolute; top: 24px; right: 28px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: rgba(255,255,255,0.18);
+        }
+
+        /* ===== INVERSIÓN ===== */
+        .investment {
+            text-align: center; padding: 70px 40px; border-radius: 30px; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #1a1c29 0%, #0f1016 100%);
+            border: 2px solid rgba(168, 85, 247, 0.5);
+        }
+        .investment::before {
+            content: ''; position: absolute; inset: -50%;
+            background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 65%);
+            animation: rotate 22s linear infinite;
+        }
+        @keyframes rotate { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+        .investment > * { position: relative; z-index: 1; }
+        .investment .eyebrow { color: #d8b4fe; }
+        .investment .amount {
+            font-size: clamp(3.2rem, 8vw, 5rem); font-weight: 800; letter-spacing: -2px; line-height: 1;
+            margin: 10px 0; background: var(--primary-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .investment .currency { display: block; color: var(--text-muted); font-size: 1rem; margin-bottom: 8px; }
+        .investment .note { color: rgba(255,255,255,0.6); font-size: 0.92rem; max-width: 460px; margin: 0 auto 32px; }
+
+        /* ===== TÉRMINOS ===== */
+        .terms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .term-card {
+            background: var(--bg-surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg); padding: 34px; transition: var(--transition);
+        }
+        .term-card:hover { border-color: rgba(168, 85, 247, 0.4); }
+        .term-icon { font-size: 1.1rem; color: #d8b4fe; margin-bottom: 16px; }
+        .term-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+        .term-card p { color: var(--text-muted); font-size: 0.94rem; }
+
+        /* ===== CTA FINAL ===== */
+        .final-cta {
+            background: var(--primary-gradient); padding: 70px 40px; border-radius: 30px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .final-cta::before {
+            content: ''; position: absolute; inset: -50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        .final-cta > * { position: relative; z-index: 1; }
+        .final-cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 14px; letter-spacing: -1px; }
+        .final-cta p { font-size: 1.15rem; margin-bottom: 30px; opacity: 0.95; }
+        .final-cta .btn-dark {
+            background: #050507; color: #fff; padding: 16px 44px; font-size: 1rem;
+            border-radius: 50px; font-weight: 700; border: none; cursor: pointer; transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .final-cta .btn-dark:hover { transform: scale(1.04); background: #15151c; }
+        .final-cta small { display: block; margin-top: 16px; font-size: 0.85rem; opacity: 0.9; }
+
+        /* ===== FOOTER ===== */
+        footer { text-align: center; padding: 60px 24px; border-top: 1px solid var(--border-light); }
+        footer .logo { margin-bottom: 8px; }
+        footer .tagline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.4rem; color: #fff; margin-bottom: 20px; }
+        .footer-contact { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+        .footer-contact a { color: var(--text-muted); font-size: 0.92rem; transition: 0.2s; }
+        .footer-contact a:hover { color: #fff; }
+        footer .copyright { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* ===== 3D PARTICLES ===== */
+        #particles-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; opacity: 0.6;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .hero { padding: 110px 0 60px; }
+            .hero-content {
+                grid-template-columns: 1fr; grid-template-rows: auto auto auto;
+                gap: 24px; text-align: center; padding: 0 32px;
+            }
+            .hero-left { grid-column: 1; grid-row: 1; text-align: center; align-self: auto; }
+            .hero-right { grid-column: 1; grid-row: 2; text-align: center; align-self: auto; }
+            .hero-cta-row { grid-column: 1; grid-row: 3; padding-top: 10px; }
+            .hero-left h1 { font-size: clamp(2rem, 8vw, 2.6rem); letter-spacing: -1px; }
+            .hero-desc { margin: 0 auto; max-width: 100%; }
+            .hero-meta { align-items: center; }
+            .hero-bg-image { object-position: center 15%; }
+            .hero-bg-halo { width: clamp(300px, 80vw, 500px); top: 35%; }
+            .hero-overlay {
+                background: linear-gradient(to bottom,
+                    rgba(5,5,7,0.85) 0%, rgba(5,5,7,0.4) 18%, transparent 35%,
+                    transparent 65%, rgba(5,5,7,0.4) 82%, rgba(5,5,7,0.92) 100%);
+            }
+            .client-grid { grid-template-columns: 1fr; gap: 40px; }
+            .panel { padding: 40px 28px; }
+            .section-header h2 { font-size: 2.2rem; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 100%;
+                background: rgba(5, 5, 7, 0.98); flex-direction: column; justify-content: center; transition: 0.4s;
+            }
+            .nav-links.active { right: 0; }
+            .section-padding { padding: 70px 0; }
+            .investment { padding: 50px 24px; }
+            .final-cta { padding: 50px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-light"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="parallax-bg" data-speed="0.1" style="top: 10%; left: 5%;"></div>
+    <div class="parallax-bg" data-speed="-0.15" style="top: 60%; right: 5%; background: rgba(236, 72, 153, 0.3);"></div>
+
+    <!-- ===== NAV ===== -->
+    <nav>
+        <div class="container nav-container">
+           <a href="https://gianvisuals.com" target="_blank" rel="noopener" class="logo">GIAN <span class="text-gradient">VISUALS</span></a>
+            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+            <div class="nav-links">
+                <a href="#cliente" onclick="closeMenu()">Cliente</a>
+                <a href="#soluciones" onclick="closeMenu()">Soluciones</a>
+                <a href="#inversion" onclick="closeMenu()">Inversión</a>
+                <a href="#terminos" onclick="closeMenu()">Términos</a>
+                <button class="btn btn-primary" id="nav-wa-btn">Confirmar</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="hero-bg">
+            <img src="hero.jpeg" alt="Gian Visuals — Partner Creativo Audiovisual" class="hero-bg-image" loading="eager">
+            <div class="hero-bg-halo"></div>
+            <div class="hero-bg-grain"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-left">
+                <span class="badge reveal reveal-up" id="hero-badge">Propuesta</span>
+                <h1 class="reveal reveal-left delay-1" id="hero-title"></h1>
+            </div>
+
+            <div class="hero-right reveal reveal-right delay-3">
+                <p class="hero-desc" id="hero-desc"></p>
+                <div class="hero-meta" id="hero-meta"></div>
+            </div>
+
+            <div class="hero-cta-row reveal reveal-up delay-3">
+                <a href="#cliente" class="btn btn-secondary">Ver propuesta</a>
+                <button class="btn btn-primary" id="hero-wa-btn">
+                    <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== INFORMACIÓN DEL CLIENTE ===== -->
+        <section id="cliente" class="container section-padding">
+            <div class="panel reveal reveal-up">
+                <div class="client-grid">
+                    <div>
+                        <span class="eyebrow reveal reveal-left delay-1">Información del cliente</span>
+                        <h2 class="reveal reveal-left delay-1" style="font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:24px;">
+                            Datos del <span class="text-gradient">Proyecto</span>
+                        </h2>
+                        <div class="client-data reveal reveal-left delay-2" id="client-data"></div>
+                    </div>
+                    <div class="reveal reveal-right delay-2">
+                        <div class="id-card-wrapper">
+                            <div class="id-card" id="tiltCard">
+                                <img src="cliente.jpg" class="id-photo" id="client-photo" alt="Foto del cliente">
+                                <span class="id-name" id="client-card-name">CLIENTE</span>
+                                <span class="id-role" id="client-card-role">Especialidad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SOLUCIONES INCLUIDAS ===== -->
+        <section id="soluciones" class="container section-padding" style="padding-top:0;">
+            <div class="section-header reveal reveal-up">
+                <h2>Soluciones <span class="text-gradient">Incluidas</span></h2>
+                <p>Todo lo que construimos para proyectar tu autoridad.</p>
+            </div>
+            <div class="solutions-grid" id="solutions-grid"></div>
+        </section>
+
+        <!-- ===== INVERSIÓN ===== -->
+        <section id="inversion" class="container section-padding" style="padding-top:0;">
+            <div class="investment reveal reveal-up">
+                <span class="eyebrow" id="investment-label">Inversión Total</span>
+                <div class="amount" id="investment-amount">$0</div>
+                <span class="currency" id="investment-currency">COP</span>
+                <p class="note" id="investment-note"></p>
+                <button class="btn btn-primary" id="investment-wa-btn" style="font-size:1rem;padding:16px 44px;">
+                    <i class="fab fa-whatsapp"></i> Confirmar inversión
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== TÉRMINOS Y CONDICIONES ===== -->
+        <section id="terminos" class="container section-padding" style="padding-top:0;">
+            <div class="section-header reveal reveal-up">
+                <h2>Términos y <span class="text-gradient">Condiciones</span></h2>
+                <p>Claridad total antes de avanzar.</p>
+            </div>
+            <div class="terms-grid" id="terms-grid"></div>
+        </section>
+
+        <!-- ===== CTA FINAL ===== -->
+        <section class="container" style="margin-bottom:100px;">
+            <div class="final-cta reveal reveal-up">
+                <h2>Avancemos Juntos</h2>
+                <p>Confirma tu propuesta y empezamos a construir tu ecosistema audiovisual.</p>
+                <button class="btn-dark" id="final-wa-btn">
+                    <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                </button>
+                <small id="final-cta-note">Sin compromiso · Resolvemos cualquier duda antes de empezar.</small>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="logo">GIAN <span class="text-gradient">VISUALS</span></div>
+        <p class="tagline">Avancemos juntos.</p>
+        <div class="footer-contact" id="footer-contact"></div>
+        <p class="copyright" id="copyright"></p>
+    </footer>
+
+    <script>
+    /* ================================================================
+       ███  EDITA AQUÍ — DATOS DE LA COTIZACIÓN  ███
+       ----------------------------------------------------------------
+       Solo cambia los textos de este bloque para cada cliente nuevo.
+       NO necesitas tocar nada más abajo.
+       ================================================================ */
+    const COTIZACION = {
+
+        /* --- Marca y contacto (casi nunca cambia) --- */
+        marca: {
+            whatsapp: "573209263077",            // número con código de país, sin "+" ni espacios
+            telefono: "320 926 3077",            // como se muestra en pantalla
+            email: "cotizaciones@gianvisuals.com"
+        },
+
+        /* --- HERO --- */
+        hero: {
+            badge: "Propuesta · Cobertura de evento",
+            // El título se arma línea por línea. La línea con "morph: true"
+            // tendrá el efecto de fuentes que cambian (como "Tu marca" en tu web).
+            titulo: [
+                { texto: "Tu físico",          morph: false },
+                { texto: "habla.",             morph: true  },
+                { texto: "Tu marca, también.", morph: false }
+            ],
+            descripcion: "El sábado 16 de mayo en H&L representando a GASP. Ese momento no se repite — pero el contenido sí puede trabajar para ti durante meses. Convertimos las tres horas del evento en un arsenal visual que posiciona tu físico y tu marca mucho después de que se apaguen las luces."
+        },
+
+        /* --- CLIENTE --- */
+        cliente: {
+            foto: "angel.JPG",                 // pon la foto de Angel en la misma carpeta del HTML
+            nombreCorto: "ANGEL",                // nombre grande en la tarjeta
+            especialidad: "Atleta · Classic Physique",
+            // Filas de datos (puedes agregar o quitar las que quieras):
+            datos: [
+                { label: "Atleta",           valor: "Angel · Classic Physique" },
+                { label: "Disciplina",       valor: "Culturismo — Classic Physique" },
+                { label: "Evento",           valor: "Culturismo Couture × GASP" },
+                { label: "Proyecto",         valor: "Cobertura fotográfica y audiovisual" },
+                { label: "Fecha del evento", valor: "Sábado 16 de mayo, 2026" }
+            ]
+        },
+
+        /* --- SOLUCIONES INCLUIDAS --- */
+        // Iconos: usa cualquiera de Font Awesome (https://fontawesome.com/icons)
+        soluciones: [
+            {
+                icono: "fa-camera",
+                titulo: "Galería fotográfica del evento",
+                descripcion: "Cobertura completa durante las tres horas del evento. Capturamos cada pose, cada detalle de tu presentación y cada momento junto a GASP. Recibes la selección completa de imágenes en alta resolución, lista para redes, prensa y tu portafolio de atleta."
+            },
+            {
+                icono: "fa-film",
+                titulo: "2 Reels editados para redes",
+                descripcion: "Dos piezas verticales editadas con ritmo y narrativa, Mostramos el proceso del evento —del backstage al escenario— para que tu audiencia viva la experiencia contigo y tu marca personal gane autoridad."
+            }
+        ],
+
+        /* --- INVERSIÓN --- */
+        inversion: {
+            etiqueta: "Inversión Total",
+            monto: "$450.000",
+            moneda: "COP — Pesos Colombianos",
+            nota: "Incluye la galería fotográfica completa y los dos Reels editados. Una sola inversión."
+        },
+
+        /* --- TÉRMINOS Y CONDICIONES --- */
+        terminos: [
+            { icono: "fa-wallet",     titulo: "Forma de pago",   texto: "50% para reservar tu fecha, 50% contra entrega del material." },
+            { icono: "fa-truck-fast", titulo: "Entrega",         texto: "Galería y Reels dentro de los 7 días hábiles posteriores al evento." },
+            { icono: "fa-bolt",       titulo: "Reserva tu cupo", texto: "Confirmación antes del viernes 15 de mayo. Solo cubrimos un evento por fecha." }
+        ]
+
+    };
+    /* ================================================================
+       ███  FIN DE LA ZONA EDITABLE  ███
+       (de aquí para abajo es el motor de la plantilla)
+       ================================================================ */
+
+
+    /* ---------- RENDER ---------- */
+    (function render() {
+        const C = COTIZACION;
+        const waMsg = encodeURIComponent("Hola Gian, quiero confirmar la propuesta que me enviaste.");
+        const waLink = "https://wa.me/" + C.marca.whatsapp + "?text=" + waMsg;
+
+        // Botones de WhatsApp
+        ["nav-wa-btn", "hero-wa-btn", "investment-wa-btn", "final-wa-btn"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener("click", () => window.open(waLink, "_blank"));
+        });
+
+        // HERO
+        document.getElementById("hero-badge").textContent = C.hero.badge;
+        document.getElementById("hero-title").innerHTML = C.hero.titulo.map(part => {
+            return part.morph
+                ? '<span class="morph-wrap"><span class="morph-text text-gradient">' + part.texto + '</span></span>'
+                : '<span>' + part.texto + '</span>';
+        }).join("<br>");
+        document.getElementById("hero-desc").textContent = C.hero.descripcion;
+        document.getElementById("hero-meta").innerHTML =
+            '<span>Preparado para <strong>' + (C.cliente.datos[0] ? C.cliente.datos[0].valor : '') + '</strong></span>' +
+            '<span>Por <strong>Gian Visuals</strong></span>';
+
+        // CLIENTE
+        const photo = document.getElementById("client-photo");
+        photo.src = C.cliente.foto;
+        photo.alt = "Foto de " + C.cliente.nombreCorto;
+        document.getElementById("client-card-name").textContent = C.cliente.nombreCorto;
+        document.getElementById("client-card-role").textContent = C.cliente.especialidad;
+        document.getElementById("client-data").innerHTML = C.cliente.datos.map(d =>
+            '<div class="row"><span class="label">' + d.label + '</span><span class="value">' + d.valor + '</span></div>'
+        ).join("");
+
+        // SOLUCIONES
+        document.getElementById("solutions-grid").innerHTML = C.soluciones.map((s, i) => {
+            const delay = "delay-" + ((i % 3) + 1);
+            return '<div class="solution-card reveal reveal-up ' + delay + '">' +
+                     '<span class="solution-num">0' + (i + 1) + '</span>' +
+                     '<div class="solution-icon"><i class="fas ' + s.icono + '"></i></div>' +
+                     '<h3>' + s.titulo + '</h3>' +
+                     '<p>' + s.descripcion + '</p>' +
+                   '</div>';
+        }).join("");
+
+        // INVERSIÓN
+        document.getElementById("investment-label").textContent = C.inversion.etiqueta;
+        document.getElementById("investment-amount").textContent = C.inversion.monto;
+        document.getElementById("investment-currency").textContent = C.inversion.moneda;
+        document.getElementById("investment-note").textContent = C.inversion.nota;
+
+        // TÉRMINOS
+        document.getElementById("terms-grid").innerHTML = C.terminos.map((t, i) => {
+            const delay = "delay-" + ((i % 3) + 1);
+            return '<div class="term-card reveal reveal-up ' + delay + '">' +
+                     '<div class="term-icon"><i class="fas ' + t.icono + '"></i></div>' +
+                     '<h4>' + t.titulo + '</h4>' +
+                     '<p>' + t.texto + '</p>' +
+                   '</div>';
+        }).join("");
+
+        // FOOTER
+        document.getElementById("footer-contact").innerHTML =
+            '<a href="tel:' + C.marca.telefono.replace(/\s/g, "") + '"><i class="fas fa-phone"></i> ' + C.marca.telefono + '</a>' +
+            '<a href="mailto:' + C.marca.email + '"><i class="fas fa-envelope"></i> ' + C.marca.email + '</a>' +
+            '<a href="' + waLink + '" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>';
+        document.getElementById("copyright").innerHTML =
+            "&copy; " + new Date().getFullYear() + " Gian Visuals. Todos los derechos reservados.";
+    })();
+
+
+    /* ---------- MENÚ MÓVIL ---------- */
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.onclick = () => {
+        navLinks.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+    };
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+
+
+    /* ---------- REVEAL ON SCROLL ---------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+    /* ---------- NAV SCROLL + PARALLAX ---------- */
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const navEl = document.querySelector('nav');
+        if (scrolled > 60) navEl.classList.add('scrolled');
+        else navEl.classList.remove('scrolled');
+
+        document.querySelectorAll('[data-speed]').forEach(el => {
+            const speed = el.getAttribute('data-speed');
+            el.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+
+    /* ---------- TILT EN LA TARJETA DEL CLIENTE ---------- */
+    const card = document.getElementById('tiltCard');
+    const wrapper = document.querySelector('.id-card-wrapper');
+    if (card && wrapper) {
+        wrapper.onmousemove = (e) => {
+            const rect = wrapper.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(1000px) rotateY(${x * 24}deg) rotateX(${-y * 24}deg) scale(1.04)`;
+            card.style.animation = 'none';
+        };
+        wrapper.onmouseleave = () => {
+            card.style.transform = 'rotateY(0) rotateX(0)';
+            card.style.animation = 'floatCard 6s ease-in-out infinite';
+        };
+    }
+
+
+    /* ---------- PARTÍCULAS 3D ---------- */
+    window.addEventListener('load', () => {
+        if (typeof THREE === 'undefined') return;
+        const canvas = document.getElementById('particles-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [], colors = [];
+        for (let i = 0; i < 2000; i++) {
+            vertices.push(
+                Math.random() * 2000 - 1000,
+                Math.random() * 2000 - 1000,
+                Math.random() * 2000 - 1000
+            );
+            const color = new THREE.Color();
+            color.setHSL(0.6 + Math.random() * 0.2, 0.8, 0.6);
+            colors.push(color.r, color.g, color.b);
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 2, vertexColors: true, transparent: true, opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+        camera.position.z = 500;
+
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.x += 0.0003;
+            particles.rotation.y += 0.0005;
+            camera.position.x += (mouseX * 50 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 50 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    });
+    </script>
+</body>
+</html>

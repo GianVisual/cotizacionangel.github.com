@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cotización | Gian Visuals</title>
+    <title>Cotización · Tato Cadavid · Perrys + Mónica Barrero | Gian Visuals</title>
     <meta name="description" content="Propuesta audiovisual premium — Gian Visuals. Producción de video vertical y ecosistemas audiovisuales para marcas y líderes de industria.">
     <meta name="robots" content="noindex">
 
@@ -342,25 +342,95 @@
         }
 
         /* ===== RESPONSIVE ===== */
+        /* Mobile sofisticado portado desde gianvisuals.com:
+           grid de 2 columnas (texto izquierda / cara visible derecha),
+           overlay asimétrico, breakpoint extra a 480px */
         @media (max-width: 968px) {
-            .hero { padding: 110px 0 60px; }
+            .hero {
+                padding: 90px 0 30px;
+                min-height: 100vh;
+            }
             .hero-content {
-                grid-template-columns: 1fr; grid-template-rows: auto auto auto;
-                gap: 24px; text-align: center; padding: 0 32px;
+                grid-template-columns: 1.05fr 0.95fr;
+                grid-template-rows: 1fr 1fr auto;
+                gap: 0 20px;
+                text-align: left;
+                padding: 0 20px;
+                min-height: calc(100vh - 120px);
+                align-items: stretch;
             }
-            .hero-left { grid-column: 1; grid-row: 1; text-align: center; align-self: auto; }
-            .hero-right { grid-column: 1; grid-row: 2; text-align: center; align-self: auto; }
-            .hero-cta-row { grid-column: 1; grid-row: 3; padding-top: 10px; }
-            .hero-left h1 { font-size: clamp(2rem, 8vw, 2.6rem); letter-spacing: -1px; }
-            .hero-desc { margin: 0 auto; max-width: 100%; }
-            .hero-meta { align-items: center; }
-            .hero-bg-image { object-position: center 15%; }
-            .hero-bg-halo { width: clamp(300px, 80vw, 500px); top: 35%; }
+            /* Columna IZQUIERDA, fila superior: HEADLINE */
+            .hero-left {
+                grid-column: 1; grid-row: 1;
+                text-align: left; align-self: end;
+                padding-bottom: 28px;
+            }
+            /* Columna IZQUIERDA, fila central: DESCRIPCIÓN + META */
+            .hero-right {
+                grid-column: 1; grid-row: 2;
+                text-align: left; align-self: start;
+                padding: 12px 0 0; margin: 0; width: 100%;
+            }
+            /* CTAs ocupan ambas columnas abajo */
+            .hero-cta-row {
+                grid-column: 1 / -1; grid-row: 3;
+                padding-top: 24px; padding-bottom: 8px;
+                align-self: end;
+            }
+            .hero-left .badge {
+                margin-bottom: 14px; font-size: 0.65rem; padding: 4px 12px;
+            }
+            .hero-left h1 {
+                font-size: clamp(1.4rem, 5.8vw, 1.85rem);
+                letter-spacing: -1px; line-height: 1.08;
+            }
+            .hero-left h1 br { display: none; }
+            .hero-left h1 .muted { display: inline; }
+            .hero-desc {
+                font-size: 0.72rem; margin: 0; max-width: 100%;
+                line-height: 1.5; color: rgba(255,255,255,0.75);
+                text-align: left;
+                text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+            }
+            .hero-meta {
+                margin-top: 14px;
+                align-items: flex-start;
+            }
+            .hero-meta span { font-size: 0.7rem; }
+            .hero-cta-row {
+                flex-direction: column; gap: 10px;
+                width: 100%; align-items: center;
+            }
+            .hero-cta-row .btn {
+                width: 100%; max-width: 360px;
+                padding: 14px 24px; font-size: 0.92rem;
+            }
+            /* Foto: la cara visible en el lado derecho del frame */
+            .hero-bg-image { object-position: 35% 22%; }
+            .hero-bg-halo {
+                width: clamp(260px, 60vw, 360px);
+                top: 35%; left: 55%;
+            }
+            /* Overlay asimétrico: oscurece IZQUIERDA (donde va el texto),
+               mantiene DERECHA limpia (donde se ve la cara) */
             .hero-overlay {
-                background: linear-gradient(to bottom,
-                    rgba(5,5,7,0.85) 0%, rgba(5,5,7,0.4) 18%, transparent 35%,
-                    transparent 65%, rgba(5,5,7,0.4) 82%, rgba(5,5,7,0.92) 100%);
+                background:
+                    linear-gradient(to right,
+                        rgba(5, 5, 7, 0.85) 0%,
+                        rgba(5, 5, 7, 0.65) 30%,
+                        rgba(5, 5, 7, 0.25) 50%,
+                        transparent 65%,
+                        transparent 100%
+                    ),
+                    linear-gradient(to bottom,
+                        rgba(5, 5, 7, 0.6) 0%,
+                        transparent 18%,
+                        transparent 70%,
+                        rgba(5, 5, 7, 0.88) 90%,
+                        rgba(5, 5, 7, 0.98) 100%
+                    );
             }
+            /* Resto de secciones */
             .client-grid { grid-template-columns: 1fr; gap: 40px; }
             .panel { padding: 40px 28px; }
             .section-header h2 { font-size: 2.2rem; }
@@ -377,6 +447,18 @@
             .investment { padding: 50px 24px; }
             .final-cta { padding: 50px 24px; }
         }
+        /* Móviles pequeños */
+        @media (max-width: 480px) {
+            .hero { padding: 85px 0 24px; }
+            .hero-content {
+                padding: 0 16px;
+                min-height: calc(100vh - 110px);
+                gap: 0 12px;
+            }
+            .hero-left h1 { font-size: clamp(1.25rem, 6.5vw, 1.65rem); }
+            .hero-desc { font-size: 0.7rem; }
+            .hero-bg-image { object-position: 33% 22%; }
+        }
     </style>
 </head>
 <body>
@@ -389,7 +471,7 @@
     <!-- ===== NAV ===== -->
     <nav>
         <div class="container nav-container">
-           <a href="https://gianvisuals.com" target="_blank" rel="noopener" class="logo">GIAN <span class="text-gradient">VISUALS</span></a>
+            <div class="logo">GIAN <span class="text-gradient">VISUALS</span></div>
             <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
             <div class="nav-links">
                 <a href="#cliente" onclick="closeMenu()">Cliente</a>
@@ -489,12 +571,12 @@
         <!-- ===== CTA FINAL ===== -->
         <section class="container" style="margin-bottom:100px;">
             <div class="final-cta reveal reveal-up">
-                <h2>Avancemos Juntos</h2>
-                <p>Confirma tu propuesta y empezamos a construir tu ecosistema audiovisual.</p>
+                <h2>Tu mes empieza ahora.</h2>
+                <p>Confirma y arranco el calendario de contenido para Perrys y Mónica Barrero esta misma semana.</p>
                 <button class="btn-dark" id="final-wa-btn">
                     <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
                 </button>
-                <small id="final-cta-note">Sin compromiso · Resolvemos cualquier duda antes de empezar.</small>
+                <small id="final-cta-note">Confirmas, arrancamos con la fase de inmersión creativa. Tu ecosistema empieza a operar de inmediato.</small>
             </div>
         </section>
     </main>
@@ -518,67 +600,70 @@
 
         /* --- Marca y contacto (casi nunca cambia) --- */
         marca: {
-            whatsapp: "573209263077",            // número con código de país, sin "+" ni espacios
-            telefono: "320 926 3077",            // como se muestra en pantalla
+            whatsapp: "573209263077",
+            telefono: "320 926 3077",
             email: "cotizaciones@gianvisuals.com"
         },
 
         /* --- HERO --- */
         hero: {
-            badge: "Propuesta · Cobertura de evento",
-            // El título se arma línea por línea. La línea con "morph: true"
-            // tendrá el efecto de fuentes que cambian (como "Tu marca" en tu web).
+            badge: "Propuesta · Ecosistema mensual para Instagram",
+            // La línea 2 ("Un lenguaje") tiene el efecto morph — y al cambiar
+            // entre 4 fuentes distintas, demuestra visualmente el concepto.
             titulo: [
-                { texto: "Tu físico",          morph: false },
-                { texto: "habla.",             morph: true  },
-                { texto: "Tu marca, también.", morph: false }
+                { texto: "Dos marcas.",   morph: false },
+                { texto: "Un lenguaje.",  morph: true  },
+                { texto: "Cada mes.",     morph: false }
             ],
-            descripcion: "El sábado 16 de mayo en H&L representando a GASP. Ese momento no se repite — pero el contenido sí puede trabajar para ti durante meses. Convertimos las tres horas del evento en un arsenal visual que posiciona tu físico y tu marca mucho después de que se apaguen las luces."
+            descripcion: "Mientras la mayoría improvisa post a post, tú diseñas un sistema mensual de contenido para Perrys y Mónica Barrero. Estética, ritmo y narrativa alineadas — porque la modernidad no se improvisa, se diseña."
         },
 
         /* --- CLIENTE --- */
         cliente: {
-            foto: "angel.jpg",                 // pon la foto de Angel en la misma carpeta del HTML
-            nombreCorto: "ANGEL",                // nombre grande en la tarjeta
-            especialidad: "Atleta · Classic Physique",
-            // Filas de datos (puedes agregar o quitar las que quieras):
+            foto: "cliente.jpg",
+            nombreCorto: "TATO",
+            especialidad: "Director de Marca",
             datos: [
-                { label: "Atleta",           valor: "Angel · Classic Physique" },
-                { label: "Disciplina",       valor: "Culturismo — Classic Physique" },
-                { label: "Evento",           valor: "Culturismo Couture × GASP" },
-                { label: "Proyecto",         valor: "Cobertura fotográfica y audiovisual" },
-                { label: "Fecha del evento", valor: "Sábado 16 de mayo, 2026" }
+                { label: "Director de marca", valor: "Tato Cadavid" },
+                { label: "Marcas",            valor: "Perrys · Mónica Barrero Ortodoncia" },
+                { label: "Proyecto",          valor: "Ecosistema audiovisual mensual" },
+                { label: "Volumen mensual",   valor: "16 Reels + 6 carruseles · Instagram" },
+                { label: "Inicio",            valor: "Próxima semana" }
             ]
         },
 
         /* --- SOLUCIONES INCLUIDAS --- */
-        // Iconos: usa cualquiera de Font Awesome (https://fontawesome.com/icons)
         soluciones: [
             {
-                icono: "fa-camera",
-                titulo: "Galería fotográfica del evento",
-                descripcion: "Cobertura completa durante las tres horas del evento. Capturamos cada pose, cada detalle de tu presentación y cada momento junto a GASP. Recibes la selección completa de imágenes en alta resolución, lista para redes, prensa y tu portafolio de atleta."
+                icono: "fa-compass-drafting",
+                titulo: "Dirección creativa unificada",
+                descripcion: "Un solo lenguaje visual gobierna ambas marcas. Al inicio del mes definimos la estética, el ritmo y los códigos de Perrys y Mónica Barrero — para que cada pieza sea reconocible al instante, no improvisada."
             },
             {
-                icono: "fa-film",
-                titulo: "2 Reels editados para redes",
-                descripcion: "Dos piezas verticales editadas con ritmo y narrativa, Mostramos el proceso del evento —del backstage al escenario— para que tu audiencia viva la experiencia contigo y tu marca personal gane autoridad."
+                icono: "fa-photo-film",
+                titulo: "16 Reels listos para publicar",
+                descripcion: "Cada Reel llega a Instagram como un post terminado: video con guion, grabación y edición + portada diseñada para tu grid + copy estratégico que invita a comentar. 8 paquetes por marca cada mes — sin que tengas que pensar absolutamente nada más."
+            },
+            {
+                icono: "fa-layer-group",
+                titulo: "6 carruseles editoriales para Instagram",
+                descripcion: "3 carruseles por marca cada mes. Diseño editorial pensado para detener el scroll, comunicar autoridad y alimentar el algoritmo con contenido que la audiencia guarda y comparte."
             }
         ],
 
         /* --- INVERSIÓN --- */
         inversion: {
-            etiqueta: "Inversión Total",
-            monto: "$450.000",
-            moneda: "COP — Pesos Colombianos",
-            nota: "Incluye la galería fotográfica completa y los dos Reels editados. Una sola inversión."
+            etiqueta: "Inversión Mensual",
+            monto: "$1.590.000",
+            moneda: "COP — Pesos Colombianos / mes",
+            nota: "Incluye estrategia, producción y entrega de 22 publicaciones completas para Instagram cada mes. Una sola inversión por dos ecosistemas que trabajan en paralelo."
         },
 
         /* --- TÉRMINOS Y CONDICIONES --- */
         terminos: [
-            { icono: "fa-wallet",     titulo: "Forma de pago",   texto: "50% para reservar tu fecha, 50% contra entrega del material." },
-            { icono: "fa-truck-fast", titulo: "Entrega",         texto: "Galería y Reels dentro de los 10 días hábiles posteriores al evento." },
-            { icono: "fa-bolt",       titulo: "Reserva tu cupo", texto: "Confirmación antes del viernes 15 de mayo. Solo cubrimos un evento por fecha." }
+            { icono: "fa-wallet",          titulo: "Forma de pago",     texto: "50% al inicio del mes para arrancar producción · 50% al cierre cuando todo esté entregado." },
+            { icono: "fa-calendar-days",   titulo: "Calendario mensual", texto: "Entregas escalonadas a lo largo del mes para alimentar el feed sin pausas." },
+            { icono: "fa-user-lock",       titulo: "Cupos limitados",   texto: "Solo tomo 3 clientes en formato ecosistema mensual para garantizar dedicación total a cada marca." }
         ]
 
     };

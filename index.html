@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cotización · Tato Cadavid · Perrys + Mónica Barrero | Gian Visuals</title>
-    <meta name="description" content="Propuesta audiovisual premium — Gian Visuals. Producción de video vertical y ecosistemas audiovisuales para marcas y líderes de industria.">
+    <title>Tato y Mónica, esto es lo que construimos para Perrys y Mónica Barrero.</title>
+    <meta name="description" content="Un mes. Dos marcas. Un solo lenguaje. Ábranlo cuando estén en silencio.">
     <meta name="robots" content="noindex">
 
-    <meta property="og:title" content="Propuesta Audiovisual | Gian Visuals">
-    <meta property="og:description" content="Producción audiovisual premium diseñada para proyectar autoridad.">
+    <meta property="og:title" content="Tato y Mónica, esto es lo que construimos para Perrys y Mónica Barrero.">
+    <meta property="og:description" content="Un mes. Dos marcas. Un solo lenguaje. Ábranlo cuando estén en silencio.">
     <meta property="og:type" content="website">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -293,9 +293,13 @@
         }
         .investment .currency { display: block; color: var(--text-muted); font-size: 1rem; margin-bottom: 8px; }
         .investment .note { color: rgba(255,255,255,0.6); font-size: 0.92rem; max-width: 460px; margin: 0 auto 32px; }
+        .investment .response-time { display: block; margin-top: 14px; color: rgba(255,255,255,0.55); font-size: 0.85rem; }
 
         /* ===== TÉRMINOS ===== */
         .terms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        @media (min-width: 900px) {
+            .terms-grid { grid-template-columns: repeat(3, 1fr); }
+        }
         .term-card {
             background: var(--bg-surface); border: 1px solid var(--border-light);
             border-radius: var(--radius-lg); padding: 34px; transition: var(--transition);
@@ -342,9 +346,6 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        /* Mobile sofisticado portado desde gianvisuals.com:
-           grid de 2 columnas (texto izquierda / cara visible derecha),
-           overlay asimétrico, breakpoint extra a 480px */
         @media (max-width: 968px) {
             .hero {
                 padding: 90px 0 30px;
@@ -359,19 +360,16 @@
                 min-height: calc(100vh - 120px);
                 align-items: stretch;
             }
-            /* Columna IZQUIERDA, fila superior: HEADLINE */
             .hero-left {
                 grid-column: 1; grid-row: 1;
                 text-align: left; align-self: end;
                 padding-bottom: 28px;
             }
-            /* Columna IZQUIERDA, fila central: DESCRIPCIÓN + META */
             .hero-right {
                 grid-column: 1; grid-row: 2;
                 text-align: left; align-self: start;
                 padding: 12px 0 0; margin: 0; width: 100%;
             }
-            /* CTAs ocupan ambas columnas abajo */
             .hero-cta-row {
                 grid-column: 1 / -1; grid-row: 3;
                 padding-top: 24px; padding-bottom: 8px;
@@ -405,14 +403,11 @@
                 width: 100%; max-width: 360px;
                 padding: 14px 24px; font-size: 0.92rem;
             }
-            /* Foto: la cara visible en el lado derecho del frame */
             .hero-bg-image { object-position: 35% 22%; }
             .hero-bg-halo {
                 width: clamp(260px, 60vw, 360px);
                 top: 35%; left: 55%;
             }
-            /* Overlay asimétrico: oscurece IZQUIERDA (donde va el texto),
-               mantiene DERECHA limpia (donde se ve la cara) */
             .hero-overlay {
                 background:
                     linear-gradient(to right,
@@ -430,7 +425,6 @@
                         rgba(5, 5, 7, 0.98) 100%
                     );
             }
-            /* Resto de secciones */
             .client-grid { grid-template-columns: 1fr; gap: 40px; }
             .panel { padding: 40px 28px; }
             .section-header h2 { font-size: 2.2rem; }
@@ -447,7 +441,6 @@
             .investment { padding: 50px 24px; }
             .final-cta { padding: 50px 24px; }
         }
-        /* Móviles pequeños */
         @media (max-width: 480px) {
             .hero { padding: 85px 0 24px; }
             .hero-content {
@@ -475,10 +468,10 @@
             <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
             <div class="nav-links">
                 <a href="#cliente" onclick="closeMenu()">Cliente</a>
-                <a href="#soluciones" onclick="closeMenu()">Soluciones</a>
+                <a href="#soluciones" onclick="closeMenu()">Ecosistema</a>
                 <a href="#inversion" onclick="closeMenu()">Inversión</a>
-                <a href="#terminos" onclick="closeMenu()">Términos</a>
-                <button class="btn btn-primary" id="nav-wa-btn">Confirmar</button>
+                <a href="#terminos" onclick="closeMenu()">Cómo trabajamos</a>
+                <button class="btn btn-primary" id="nav-wa-btn">Hablemos</button>
             </div>
         </div>
     </nav>
@@ -504,9 +497,9 @@
             </div>
 
             <div class="hero-cta-row reveal reveal-up delay-3">
-                <a href="#cliente" class="btn btn-secondary">Ver propuesta</a>
+                <a href="#cliente" class="btn btn-secondary">Ver el plan del mes</a>
                 <button class="btn btn-primary" id="hero-wa-btn">
-                    <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                    <i class="fab fa-whatsapp"></i> Hablemos por WhatsApp
                 </button>
             </div>
         </div>
@@ -518,9 +511,9 @@
             <div class="panel reveal reveal-up">
                 <div class="client-grid">
                     <div>
-                        <span class="eyebrow reveal reveal-left delay-1">Información del cliente</span>
+                        <span class="eyebrow reveal reveal-left delay-1">El proyecto en una página</span>
                         <h2 class="reveal reveal-left delay-1" style="font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:24px;">
-                            Datos del <span class="text-gradient">Proyecto</span>
+                            Esto es lo que <span class="text-gradient">vamos a construir</span>
                         </h2>
                         <div class="client-data reveal reveal-left delay-2" id="client-data"></div>
                     </div>
@@ -540,8 +533,8 @@
         <!-- ===== SOLUCIONES INCLUIDAS ===== -->
         <section id="soluciones" class="container section-padding" style="padding-top:0;">
             <div class="section-header reveal reveal-up">
-                <h2>Soluciones <span class="text-gradient">Incluidas</span></h2>
-                <p>Todo lo que construimos para proyectar tu autoridad.</p>
+                <h2>El ecosistema, <span class="text-gradient">pieza por pieza</span></h2>
+                <p>Tres engranajes diseñados para que cada mes Perrys y Mónica suenen como una sola voz.</p>
             </div>
             <div class="solutions-grid" id="solutions-grid"></div>
         </section>
@@ -549,20 +542,21 @@
         <!-- ===== INVERSIÓN ===== -->
         <section id="inversion" class="container section-padding" style="padding-top:0;">
             <div class="investment reveal reveal-up">
-                <span class="eyebrow" id="investment-label">Inversión Total</span>
+                <span class="eyebrow" id="investment-label">Inversión Mensual</span>
                 <div class="amount" id="investment-amount">$0</div>
                 <span class="currency" id="investment-currency">COP</span>
                 <p class="note" id="investment-note"></p>
                 <button class="btn btn-primary" id="investment-wa-btn" style="font-size:1rem;padding:16px 44px;">
-                    <i class="fab fa-whatsapp"></i> Confirmar inversión
+                    <i class="fab fa-whatsapp"></i> Queremos arrancar este mes
                 </button>
+                <span class="response-time">Les respondo en menos de 1 hora.</span>
             </div>
         </section>
 
         <!-- ===== TÉRMINOS Y CONDICIONES ===== -->
         <section id="terminos" class="container section-padding" style="padding-top:0;">
             <div class="section-header reveal reveal-up">
-                <h2>Términos y <span class="text-gradient">Condiciones</span></h2>
+                <h2>Cómo <span class="text-gradient">trabajamos juntos</span></h2>
                 <p>Claridad total antes de avanzar.</p>
             </div>
             <div class="terms-grid" id="terms-grid"></div>
@@ -571,12 +565,12 @@
         <!-- ===== CTA FINAL ===== -->
         <section class="container" style="margin-bottom:100px;">
             <div class="final-cta reveal reveal-up">
-                <h2>Tu mes empieza ahora.</h2>
-                <p>Confirma y arranco el calendario de contenido para Perrys y Mónica Barrero esta misma semana.</p>
+                <h2>Su mes empieza ahora.</h2>
+                <p>Confirmen y arranco el calendario de contenido para Perrys y Mónica Barrero esta misma semana.</p>
                 <button class="btn-dark" id="final-wa-btn">
-                    <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                    <i class="fab fa-whatsapp"></i> Vamos, arrancamos
                 </button>
-                <small id="final-cta-note">Confirmas, arrancamos con la fase de inmersión creativa. Tu ecosistema empieza a operar de inmediato.</small>
+                <small id="final-cta-note">En cuanto confirmen, arrancamos la inmersión creativa. Los primeros frames llegan en días, no en semanas.</small>
             </div>
         </section>
     </main>
@@ -605,49 +599,52 @@
             email: "cotizaciones@gianvisuals.com"
         },
 
+        /* --- Mensaje pre-llenado de WhatsApp (personalizado por cliente) --- */
+        whatsappMessage: "Hola Gian, somos Tato y Mónica. Le dimos una vuelta a la propuesta — hablemos.",
+
         /* --- HERO --- */
         hero: {
-            badge: "Propuesta · Ecosistema mensual para Instagram",
+            badge: "Ecosistema mensual · Diseñado para Tato + Mónica",
             // La línea 2 ("Un lenguaje") tiene el efecto morph — y al cambiar
             // entre 4 fuentes distintas, demuestra visualmente el concepto.
             titulo: [
                 { texto: "Dos marcas.",   morph: false },
                 { texto: "Un lenguaje.",  morph: true  },
-                { texto: "Cada mes.",     morph: false }
+                { texto: "Un propósito.",     morph: false }
             ],
-            descripcion: "Mientras la mayoría improvisa post a post, tú diseñas un sistema mensual de contenido para Perrys y Mónica Barrero. Estética, ritmo y narrativa alineadas — porque la modernidad no se improvisa, se diseña."
+            descripcion: "Olvídense de pensar 'qué subo hoy'. Cada mes les entrego el contenido de Perrys y Mónica Barrero ya listo — pensado, producido y aprobado por ustedes. Ustedes solo se preocupan por su día a día."
         },
 
         /* --- CLIENTE --- */
         cliente: {
             foto: "cliente.jpg",
-            nombreCorto: "TATO",
-            especialidad: "Director de Marca",
+            nombreCorto: "TATO + MÓNICA",
+            especialidad: "Detrás de las marcas",
             datos: [
-                { label: "Director de marca", valor: "Tato Cadavid" },
-                { label: "Marcas",            valor: "Perrys · Mónica Barrero Ortodoncia" },
-                { label: "Proyecto",          valor: "Ecosistema audiovisual mensual" },
-                { label: "Volumen mensual",   valor: "16 Reels + 6 carruseles · Instagram" },
-                { label: "Inicio",            valor: "Próxima semana" }
+                { label: "Detrás de las marcas", valor: "Tato Cadavid + Mónica Barrero" },
+                { label: "Marcas que orquesto", valor: "Perrys · Mónica Barrero Ortodoncia" },
+                { label: "Proyecto",            valor: "Ecosistema audiovisual mensual" },
+                { label: "Volumen mensual",     valor: "22 piezas terminadas (14 Reels + 8 carruseles)" },
+                { label: "Inicio",              valor: "En cuanto confirmen" }
             ]
         },
 
         /* --- SOLUCIONES INCLUIDAS --- */
         soluciones: [
             {
-                icono: "fa-compass-drafting",
-                titulo: "Dirección creativa unificada",
-                descripcion: "Un solo lenguaje visual gobierna ambas marcas. Al inicio del mes definimos la estética, el ritmo y los códigos de Perrys y Mónica Barrero — para que cada pieza sea reconocible al instante, no improvisada."
+                icono: "fa-calendar-check",
+                titulo: "Estrategia antes de cámara",
+                descripcion: "El error caro es grabar primero y pensar después. Cada mes empieza con un calendario aprobado por ustedes: qué pieza, qué tema, qué intención. Cuando entramos a producción, ya sabemos exactamente qué estamos construyendo — y ustedes ya saben exactamente qué van a publicar."
             },
             {
                 icono: "fa-photo-film",
-                titulo: "16 Reels listos para publicar",
-                descripcion: "Cada Reel llega a Instagram como un post terminado: video con guion, grabación y edición + portada diseñada para tu grid + copy estratégico que invita a comentar. 8 paquetes por marca cada mes — sin que tengas que pensar absolutamente nada más."
+                titulo: "14 Reels listos para publicar",
+                descripcion: "Cada Reel llega a sus feeds como una pieza terminada: video con guion, grabación y edición + portada pensada para su grid + copy que demuestra autoridad. 7 por marca, cada mes — sin que tengan que pensar en una sola cosa más."
             },
             {
                 icono: "fa-layer-group",
-                titulo: "6 carruseles editoriales para Instagram",
-                descripcion: "3 carruseles por marca cada mes. Diseño editorial pensado para detener el scroll, comunicar autoridad y alimentar el algoritmo con contenido que la audiencia guarda y comparte."
+                titulo: "8 carruseles editoriales para Instagram",
+                descripcion: "4 carruseles por marca, cada mes. Pensados como pequeñas revistas: Narrativa que se lee de corrido, cierre que el lector conozca las marcas. El tipo de pieza que el algoritmo premia porque la audiencia decide quedársela."
             }
         ],
 
@@ -655,15 +652,17 @@
         inversion: {
             etiqueta: "Inversión Mensual",
             monto: "$1.590.000",
-            moneda: "COP — Pesos Colombianos / mes",
-            nota: "Incluye estrategia, producción y entrega de 22 publicaciones completas para Instagram cada mes. Una sola inversión por dos ecosistemas que trabajan en paralelo."
+            moneda: "COP / mes · equivale a ~$72.000 por pieza publicada",
+            nota: "Incluye estrategia, producción y entrega de 22 publicaciones terminadas cada mes. Una sola inversión para dos ecosistemas — el equivalente a contratar dos agencias, sin contratar ninguna."
         },
 
         /* --- TÉRMINOS Y CONDICIONES --- */
         terminos: [
-            { icono: "fa-wallet",          titulo: "Forma de pago",     texto: "50% al inicio del mes para arrancar producción · 50% al cierre cuando todo esté entregado." },
-            { icono: "fa-calendar-days",   titulo: "Calendario mensual", texto: "Entregas escalonadas a lo largo del mes para alimentar el feed sin pausas." },
-            { icono: "fa-user-lock",       titulo: "Cupos limitados",   texto: "Solo tomo 3 clientes en formato ecosistema mensual para garantizar dedicación total a cada marca." }
+            { icono: "fa-wallet",            titulo: "Forma de pago",            texto: "50% al inicio del mes para arrancar producción. 50% al cierre, una vez tengan las 22 piezas en sus manos. Sin contratos largos: si en 30 días no sienten el cambio, no continuamos." },
+            { icono: "fa-calendar-days",     titulo: "Calendario mensual",       texto: "Entregas escalonadas semana a semana. Sus feeds no paran — y tampoco les llega todo de golpe para que improvisen la publicación." },
+            { icono: "fa-cloud-arrow-down",  titulo: "Ustedes publican, yo produzco", texto: "Les entrego cada pieza lista en un drive privado: video, portada y copy. Ustedes publican desde sus propias cuentas, cuando quieran — sin compartirme accesos, sin perder el control de sus cuentas." },
+            { icono: "fa-bolt",              titulo: "Historias: su territorio", texto: "Las Stories no entran en el paquete — y es a propósito. Son su espacio para el detrás de cámaras, el día a día con su voz. Esa cercanía no se produce, se vive." },
+            { icono: "fa-user-lock",         titulo: "Cupos limitados",          texto: "Solo tomamos 6 marcas en formato ecosistema mensual para garantizar dedicación total a cada una. No es presión: es que dos marcas a la vez ya es un compromiso de calidad serio." }
         ]
 
     };
@@ -676,7 +675,7 @@
     /* ---------- RENDER ---------- */
     (function render() {
         const C = COTIZACION;
-        const waMsg = encodeURIComponent("Hola Gian, quiero confirmar la propuesta que me enviaste.");
+        const waMsg = encodeURIComponent(C.whatsappMessage || "Hola Gian, vi la propuesta. Hablemos.");
         const waLink = "https://wa.me/" + C.marca.whatsapp + "?text=" + waMsg;
 
         // Botones de WhatsApp
